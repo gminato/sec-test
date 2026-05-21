@@ -1,0 +1,113 @@
+---
+title: "Welcome to MDX!"
+author: "Antigravity"
+date: "2026-05-21"
+description: "A showcase of what is possible with MDX."
+---
+
+# MDX Features & Examples
+
+MDX allows you to write JSX (components, inline elements, expressions) directly inside markdown files. It brings the power of component-driven development into text editing.
+
+---
+
+## 1. Mixing Markdown and Inline JSX
+
+In MDX, you can use regular HTML/JSX elements directly in the middle of your Markdown paragraphs.
+
+<div style={{ padding: '1.5rem', borderRadius: '8px', backgroundColor: '#e0f2fe', color: '#0369a1', margin: '1rem 0', borderLeft: '4px solid #0284c7' }}>
+  ### 💡 Inline Callout
+  This is a box created using a native `div` styled with React's double-curly-brace style prop inline!
+</div>
+
+---
+
+## 2. Using JavaScript Expressions
+
+Since MDX is compiled to JavaScript/React, you can embed any valid JavaScript expressions inside curly braces `{}`.
+
+- **Current Year:** {new Date().getFullYear()}
+- **Math inline:** 2 + 2 = {2 + 2}
+- **String Manipulation:** {"mdx is awesome".toUpperCase()}
+
+---
+
+## 3. Importing External Components
+
+You can import components from other files just like you would in a React component:
+
+```javascript
+import InteractiveCounter from './components/InteractiveCounter'
+import LineChart from './components/LineChart'
+```
+
+*Note: In your build setup, once you create these components in a `./components` directory, you can render them like this:*
+
+{/* Example of using an imported component with props */}
+{/* <InteractiveCounter start={10} step={2} /> */}
+
+---
+
+## 4. Defining Local Components
+
+You don't always have to create a separate file to use a component. You can define local helper components directly inside your MDX file:
+
+export const Highlight = ({ children, color = '#fef08a' }) => (
+  <span style={{ backgroundColor: color, padding: '0.2rem 0.4rem', borderRadius: '4px', fontWeight: 'bold' }}>
+    {children}
+  </span>
+)
+
+You can then use it inline: This is an example of a <Highlight color="#bbf7d0">locally defined highlight</Highlight> component in action!
+
+---
+
+## 5. Exporting Data and Metadata
+
+You can export variables, objects, or arrays from MDX. This is extremely useful for generating SEO tags, navigation tables, layouts, or sidebars.
+
+```javascript
+export const metadata = {
+  title: 'My Awesome Post',
+  tags: ['mdx', 'react', 'markdown'],
+  draft: false
+}
+```
+
+export const featuredTags = ['MDX', 'JSX', 'Markdown', 'React']
+
+### Loop over exported arrays using map:
+
+<ul>
+  {featuredTags.map((tag, idx) => (
+    <li key={idx} style={{ color: '#059669', fontWeight: 'bold' }}>{tag}</li>
+  ))}
+</ul>
+
+---
+
+## 6. Standard Markdown is Fully Supported
+
+Of course, all standard GFM (GitHub Flavored Markdown) formatting still works seamlessly:
+
+### Task Lists
+- [x] Write rich MDX explanation
+- [x] Provide concrete examples
+- [ ] Implement interactive components
+
+### Tables
+| Feature | Markdown (.md) | MDX (.mdx) |
+| :--- | :---: | :---: |
+| **Standard Syntax** | ✅ Yes | ✅ Yes |
+| **JSX Elements** | ❌ No | ✅ Yes |
+| **ES Imports/Exports**| ❌ No | ✅ Yes |
+| **React Components** | ❌ No | ✅ Yes |
+
+### Code Blocks with Syntax Highlighting
+
+```typescript
+function greet(user: string): string {
+  return `Hello, ${user}! Welcome to the world of MDX.`;
+}
+console.log(greet("Developer"));
+```
